@@ -35,6 +35,20 @@ include('../Controllers/loginaccount.php');
                 <div class="form-container">
                     <p class="title">Login</p>
                     <form class="form" method="post">
+                        <?php
+                        if (isset($_GET['message']) == "fail") {
+                            echo "
+                            <script>
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: 'Password or username_email are not completed!!',
+                                   footer: '<div>Please complete all required fields before submitting.</div>'
+                                });
+                            </script>";
+                        }
+
+
+                        ?>
                         <div class="input-group">
                             <label for="username">Username/Email</label>
                             <input type="text" name="username_email" id="username" placeholder="">

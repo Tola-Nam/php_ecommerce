@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "User Detail";
 include '../Controllers/function.php';
 ?>
@@ -81,7 +82,8 @@ include '../Controllers/function.php';
                 <li class="list-group-item bg-dark text-white fs-5"><a class="text-white text-decoration-none"
                         href="report.php"><i class="bi bi-card-checklist me-2"></i>report</a></li>
                 <li class="list-group-item bg-dark text-white fs-5"> <a type="submit"
-                        class="text-danger text-decoration-none" href=""><i class="bi bi-box-arrow-left me-2"></i>
+                        class="text-danger text-decoration-none" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"><i class="bi bi-box-arrow-left me-2"></i>
                         Logout</a>
                 </li>
             </ul>
@@ -133,3 +135,25 @@ include '../Controllers/function.php';
                         }
                     }
                 </script>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to sign out?
+                                </h1>
+                                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button> -->
+                            </div>
+                            <!-- <div class="modal-body">
+                                Are you sure Do you want to logouot?
+                            </div> -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
+                                <a href="logout.php" type="button" class="btn btn-danger">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>

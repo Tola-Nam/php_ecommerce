@@ -3,7 +3,7 @@
 include '../../routes/database-conncetion.php';
 // include '../../routes/connection_link.php';
 // include('../Models/form_detail.php');
-session_start();
+// session_start();
 // function for register account
 function registerUser()
 {

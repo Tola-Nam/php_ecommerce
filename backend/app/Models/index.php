@@ -39,7 +39,6 @@ registerUser();
                                 <script>
                                     Swal.fire({
                                         icon: 'error',
-                                        title: 'Oops...',
                                         text: 'Something went wrong!',
                                        footer: '<div>Please complete all required fields before submitting.</div>'
                                     });

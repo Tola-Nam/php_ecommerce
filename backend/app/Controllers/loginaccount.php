@@ -13,20 +13,30 @@ function Login()
         // echo $username_email;
         // echo $password;
         if (empty($username_email) || empty($password)) {
-            header('Location: index.php?message=fail');
+            header('Location: login_account.php?message=fail');
         } else {
             $password = md5($password);
             $select_user = "SELECT * FROM `users`
-             WHERE (`user_name` = '$username_email' OR `email` = '$username_email' AND `password` = '$password')";
+                            WHERE (`user_name` = ('$username_email' OR `email` = '$username_email')
+                            AND (`password` = '$password'))";
 
+            // $result = database_connection()->query($select_user);
             $result = database_connection()->query($select_user);
 
             $staff_id = mysqli_fetch_assoc($result);
             // print_r($staff_id);
-            header('Loaction: dashboardpage.php');
-
+            // header('Loaction: dashboardpage.php');
+            if (isset($staff_id)) {
+                $_SESSION['staff_id'] = $staff_id['staff_id'];
+                header("Location: dashboardpage.php");
+            } else {
+                header("Location: login_accouont.php?meassage=fail");
+            }
         }
+
     }
 }
+
 Login();
+
 ?>
