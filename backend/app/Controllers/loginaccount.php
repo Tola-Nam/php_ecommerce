@@ -1,6 +1,5 @@
 <?php
 include '../../routes/database-conncetion.php';
-
 function Login()
 {
     // global $connection;
@@ -17,19 +16,25 @@ function Login()
         } else {
             $password = md5($password);
             $select_user = "SELECT * FROM `users`
-                            WHERE (`user_name` = ('$username_email' OR `email` = '$username_email')
+                            WHERE ((`user_name` = '$username_email' OR `email` = '$username_email')
                             AND (`password` = '$password'))";
 
             // $result = database_connection()->query($select_user);
-            $result = database_connection()->query($select_user);
 
-            $staff_id = mysqli_fetch_assoc($result);
             // print_r($staff_id);
             // header('Loaction: dashboardpage.php');
-            if (isset($staff_id)) {
-                $_SESSION['staff_id'] = $staff_id['staff_id'];
-                header("Location: dashboardpage.php");
-            } else {
+            try {
+                $result = database_connection()->query($select_user);
+                $staff_id = mysqli_fetch_assoc($result);
+                if (!$result) {
+                    throw new Exception("some field are not completed!! please fill some field");
+                }
+
+                if (isset($staff_id)) {
+                    $_SESSION['staff_id'] = $staff_id['staff_id'];
+                    header("Location: dashboardpage.php");
+                }
+            } catch (Exception $e) {
                 header("Location: login_accouont.php?meassage=fail");
             }
         }

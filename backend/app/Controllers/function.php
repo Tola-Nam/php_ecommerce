@@ -54,4 +54,13 @@ function addproduct()
     }
 }
 addproduct();
+
+// function for chance image to name image
+function fileuploader($sourcefile): string
+{
+    $filename = rand(0, 9999999) . date('y - m - d - h - i - s') . '.' . pathinfo($sourcefile['name'], PATHINFO_EXTENSION);
+    move_uploaded_file($sourcefile['tmp_name'], '../Asset/' . $filename);
+    return "$filename";
+}
+
 ?>

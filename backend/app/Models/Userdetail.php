@@ -2,6 +2,15 @@
 session_start();
 $title = "User Detail";
 include '../Controllers/function.php';
+
+// session_start();
+if (empty($_SESSION['staff_id'])) {
+    header("Location: login_account.php");
+}
+$staff_id = $_SESSION['staff_id'];
+$sql = "SELECT * FROM `users` WHERE `staff_id` = '$staff_id'";
+$result = database_connection()->query($sql);
+$row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +70,7 @@ include '../Controllers/function.php';
                 <div class="profile-card p-2">
                     <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
                         alt="Profile Picture" class="profile-img">
-                    <h3 class="mt-2">John Doe</h3>
+                    <h3 class="mt-2"><?php echo $row['user_name']; ?></h3>
                     <p class=" text-white ">Web Developer</p>
                     <!-- <button class="btn btn-primary">Edit Profile</button> -->
                 </div>
