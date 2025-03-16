@@ -129,8 +129,6 @@ registerUser();
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="mt-3">
                             <div class="input-group d-flex flex-column align-items-start">
                                 <div class="form-check mb-2">
@@ -143,15 +141,12 @@ registerUser();
                                 <button type="submit" class="btn btn-primary rounded-2 w-100">SIGN UP</button>
                             </div>
                         </div>
-
                         <div class="mt-3">
 
                             <span class=" text-white">Already have an account?<a href="login_account.php"
                                     class="text-primary">
                                     Login</a></span>
-
                         </div>
-
                     </form>
                 </div>
             </div>

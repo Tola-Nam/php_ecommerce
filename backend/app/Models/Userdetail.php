@@ -64,12 +64,20 @@ $row = mysqli_fetch_assoc($result);
     <div class="container d-flex ">
         <!-- Sidebar -->
         <div class="sidebar bg-dark text-white p-3 me-3 rounded-1">
-            <!-- <h4 class="text-center">Dashboard</h4> -->
-            <!-- Profile admain account -->
             <div class="container mt-3">
+                <!-- profile -->
                 <div class="profile-card p-2">
-                    <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
-                        alt="Profile Picture" class="profile-img">
+                    <?php
+                    $user_id = 1; // Replace with dynamic user ID
+                    $user_data = showprofile($user_id);
+                    $profile_image = !empty($user_data['user_profile']) ? $user_data['user_profile'] : "default.png";
+                    ?>
+                    <figure>
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                            <img src="../Asset/<?php echo "$profile_image"; ?>" alt="Profile Picture"
+                                class="profile-img">
+                        </a>
+                    </figure>
                     <h3 class="mt-2"><?php echo $row['user_name']; ?></h3>
                     <p class=" text-white ">Web Developer</p>
                     <!-- <button class="btn btn-primary">Edit Profile</button> -->
@@ -145,7 +153,7 @@ $row = mysqli_fetch_assoc($result);
                     }
                 </script>
 
-                <!-- Modal -->
+                <!-- Modal logout-->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -153,15 +161,44 @@ $row = mysqli_fetch_assoc($result);
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to sign out?
                                 </h1>
-                                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button> -->
                             </div>
-                            <!-- <div class="modal-body">
-                                Are you sure Do you want to logouot?
-                            </div> -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
                                 <a href="logout.php" type="button" class="btn btn-danger">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Form -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="profileForm" action="" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="user_profile" class="col-form-label">Profile Picture:</label>
+                                        <input type="file" class="form-control" name="user_profile" id="user_profile">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="bio" class="col-form-label">Bio:</label>
+                                        <textarea class="form-control" name="bio" id="bio"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                            <i class="bi bi-x me-2"></i>Cancel
+                                        </button>
+                                        <button type="submit" name="submit" class="btn btn-success">
+                                            <i class="bi bi-send me-2"></i>Send message
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

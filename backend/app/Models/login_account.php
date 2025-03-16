@@ -46,8 +46,6 @@ include('../Controllers/loginaccount.php');
                                 });
                             </script>";
                         }
-
-
                         ?>
                         <div class="input-group">
                             <label for="username">Username/Email</label>

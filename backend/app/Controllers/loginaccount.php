@@ -16,7 +16,7 @@ function Login()
         } else {
             $password = md5($password);
             $select_user = "SELECT * FROM `users`
-                            WHERE ((`user_name` = '$username_email' OR `email` = '$username_email')
+                            WHERE ( (`user_name` = '$username_email' OR `email` = '$username_email')
                             AND (`password` = '$password'))";
 
             // $result = database_connection()->query($select_user);
