@@ -59,41 +59,11 @@ function fileuploader($sourcefile): string
     move_uploaded_file($sourcefile['tmp_name'], '../Asset/' . $filename);
     return $filename;
 }
-// function formuploadprofile()
-// {
-//     global $connection;
-//     if (isset($_POST['submit'])) {
-//         $gender = isset($_POST['gender']);
-//         $sourcefile = $_FILES['user_profile'];
-//         $bio = isset($_POST['bio']);
-
-//         if (empty($sourcefile)) {
-//             if ($gender == "male") {
-//                 $filename = "default.png";
-//             } else {
-//                 $filename = "defaultfemale.png";
-//             }
-//         } else {
-//             $filename = fileuploader($sourcefile);
-//         }
-//         if (isset($bio) and isset($sourcefile)) {
-//             $filename = fileuploader($sourcefile);
-//             $inserQuery = "INSERT INTO `users_profile`(`user_profile`,`bio`)
-//                         VALUE ('$filename','$bio')";
-//             $Query = database_connection()->query($inserQuery);
-
-//             if ($Query) {
-//                 echo 'Input successfully';
-//             }
-//         }
-//     }
-// }
-// formuploadprofile();
 
 function formuploadprofile()
 {
     global $connection;
-
+    $author_id = $_SESSION['staff_id'];
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $bio = isset($_POST['bio']) ? trim($_POST['bio']) : '';
         $filename = "default.png"; // Default profile picture
@@ -105,48 +75,19 @@ function formuploadprofile()
 
         // Ensure bio is not empty
         if (!empty($bio)) {
-            $insertQuery = "INSERT INTO `users_profile`(`user_profile`, `bio`) VALUES ('$filename', '$bio')";
+            $insertQuery = "INSERT INTO `users_profile`(`user_profile`, `bio`,`author_id`)
+            VALUES ('$filename', '$bio','$author_id')";
             $query = database_connection()->query($insertQuery);
 
             if ($query) {
-                echo "<script>alert('Profile uploaded successfully!');</script>";
+                header("Location: dashboardpage.php?status=success");
             } else {
-                echo "<script>alert('Database error: " . database_connection()->error . "');</script>";
+                header("Location: dashboardpage.php?status=fail");
             }
         } else {
-            echo "<script>alert('Bio cannot be empty.');</script>";
+            header("Location: dashboardpage.php?status=fail");
         }
     }
 }
 formuploadprofile();
-
-
-function showprofile($user_id)
-{
-    // Query to join users_profile and users table
-    $select_profile = "SELECT 
-        u.staff_id,
-        u.Gender,
-        us.user_profile,  -- Profile image
-        us.bio            -- Bio from users_profile
-    FROM `users_profile` us 
-    LEFT JOIN `users` u 
-        ON us.author_id = u.staff_id -- Correct join condition
-    WHERE u.staff_id = ?";  // Filter by user_id (security best practice)
-
-    // Prepare query
-    $conn = database_connection();
-    $stmt = $conn->prepare($select_profile);
-    $stmt->bind_param("i", $user_id);  // Bind user_id as integer
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Fetch user data
-    if ($row = $result->fetch_assoc()) {
-        return $row;
-    } else {
-        return null; // No user found
-    }
-}
-
 ?>

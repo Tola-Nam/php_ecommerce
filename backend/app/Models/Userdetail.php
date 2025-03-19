@@ -7,10 +7,48 @@ include '../Controllers/function.php';
 if (empty($_SESSION['staff_id'])) {
     header("Location: login_account.php");
 }
-$staff_id = $_SESSION['staff_id'];
-$sql = "SELECT * FROM `users` WHERE `staff_id` = '$staff_id'";
-$result = database_connection()->query($sql);
-$row = mysqli_fetch_assoc($result);
+// join table to bring image show profile
+if (isset($_SESSION['staff_id'])) {
+
+    $staff_id = $_SESSION['staff_id'];  // Assuming this session variable is set
+
+    $sql = "SELECT * FROM `users_profile` 
+            LEFT JOIN `users` 
+            ON `users_profile`.`author_id` = `users`.`staff_id` 
+            WHERE `users`.`staff_id` = '$staff_id';";
+    $result = database_connection()->query($sql);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+    } else {
+        die("Query failed: " . database_connection()->error);
+    }
+
+    // for show profile default male or female
+    $staff_id = $_SESSION['staff_id'] ?? null; // Get logged-in user's ID
+    if (!empty($staff_id)) {
+        // Fix the SQL query by removing the trailing comma
+        $selectsql = "SELECT `gender` FROM `users` WHERE `staff_id` = '$staff_id';";
+        $queryimage = database_connection()->query($selectsql);
+
+        if ($queryimage) {
+            $row = mysqli_fetch_assoc($queryimage);
+
+            if ($row) {
+                // Proceed with handling the data (for example, setting the profile image)
+                $profile = isset($row['gender']) && $row['gender'] == 'male' ? "defaultmale.png" : "defaultfemale.png";
+            } else {
+                $profile = "default.png"; // If no user is found
+            }
+        } else {
+            echo "SQL Error: " . database_connection()->error; // For debugging query errors
+            $profile = "default.png"; // If query fails
+        }
+    } else {
+        $profile = "defaultfemale.png"; // If no user is logged in
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,18 +106,31 @@ $row = mysqli_fetch_assoc($result);
                 <!-- profile -->
                 <div class="profile-card p-2">
                     <?php
-                    $user_id = 1; // Replace with dynamic user ID
-                    $user_data = showprofile($user_id);
-                    $profile_image = !empty($user_data['user_profile']) ? $user_data['user_profile'] : "default.png";
+                    if (isset($_GET['status'])) {
+                        $status = $_GET['status'];
+                        if ($status == "success") {
+                            echo '<div class="alert alert-success fs-9">profile chances successfully!!</div>';
+                        } else {
+                            echo '<div class="alert alert-warning fs-9">profile is not completed!</div>';
+                        }
+                        // using for clear message when show on screen
+                        header("refresh:1;url=./dashboardpage.php");
+                    }
                     ?>
                     <figure>
                         <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                            <img src="../Asset/<?php echo "$profile_image"; ?>" alt="Profile Picture"
-                                class="profile-img">
+                            <img src="../Asset/<?php echo $profile; ?>" alt="Profile Picture" class="profile-img">
+
                         </a>
                     </figure>
-                    <h3 class="mt-2"><?php echo $row['user_name']; ?></h3>
-                    <p class=" text-white ">Web Developer</p>
+
+                    <h3 class="mt-2 fs-3 justify-content-center font-monospace">
+                        <?php echo isset($row['user_name']) ? $row['user_name'] : 'Unknown User'; ?>
+                    </h3>
+
+                    <p class="text-white">
+                        <?php echo isset($row['bio']) ? $row['bio'] : 'No bio available.'; ?>
+                    </p>
                     <!-- <button class="btn btn-primary">Edit Profile</button> -->
                 </div>
             </div>
@@ -109,10 +160,10 @@ $row = mysqli_fetch_assoc($result);
         <div class="content  p-3 rounded-3 align-middle">
             <div class="col">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3 d-none d-md-block">
                         <h3>Welcome Nirmal!!</h3>
                     </div>
-                    <div class="col-6">
+                    <div class="col-8">
                         <nav class="navbar navbar-light ">
                             <div class="container-fluid">
                                 <form class="d-flex" role="search">
@@ -123,15 +174,15 @@ $row = mysqli_fetch_assoc($result);
                             </div>
                         </nav>
                     </div>
-                    <div class="col-2 d-flex algin-middle">
+                    <div class="col-1 d-flex algin-middle">
                         <div class="icons">
                             <!-- Dark Mode Toggle Button -->
-                            <button class="btn btn-success btn-dark-mode me-2" type="button" onclick="toggleDarkMode()">
+                            <button class="btn btn-success btn-dark-mode me-1" type="button" onclick="toggleDarkMode()">
                                 <i class="bi bi-brightness-low"></i>
                             </button>
                         </div>
                         <div class="icons">
-                            <button class="btn btn-primary" role="button"><i class="bi bi-bell"></i></button>
+                            <button class="btn btn-primary" role="button"><i class="bi bi-bell me-1"></i></button>
                         </div>
                     </div>
 

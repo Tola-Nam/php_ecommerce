@@ -44,18 +44,6 @@ registerUser();
                                     });
                                 </script>";
                             }
-                            //  else {
-                            //     echo "
-                            //     <script>
-                            //         Swal.fire({
-                            //             icon: 'success',
-                            //             title: 'Oops...',
-                            //             text: 'Complete successfully!',
-                            //             footer: '<a href=\"#\">Please complete all required fields before submitting.</a>'
-                            //         });
-                            //     </script>";
-                            // }
-                            
                             ?>
                             <label for="user_name">User name</label>
                             <div class="input-group">
@@ -105,7 +93,6 @@ registerUser();
                             <?php
                             if (isset($_GET['meassage'])) {
                                 $message = $_GET['message'];
-
                                 echo '<div class="error">Password does not match or password length is less than 8 characters</div>';
                             }
                             ?>

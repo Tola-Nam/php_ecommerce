@@ -36,7 +36,7 @@ include('../Controllers/loginaccount.php');
                     <p class="title">Login</p>
                     <form class="form" method="post">
                         <?php
-                        if (isset($_GET['message']) == "fail") {
+                        if (isset($_GET['message']) == "fail" || isset($_GET['status']) == "invalid") {
                             echo "
                             <script>
                                 Swal.fire({
