@@ -28,25 +28,40 @@ if (isset($_SESSION['staff_id'])) {
     $staff_id = $_SESSION['staff_id'] ?? null; // Get logged-in user's ID
     if (!empty($staff_id)) {
         // Fix the SQL query by removing the trailing comma
-        $selectsql = "SELECT `gender` FROM `users` WHERE `staff_id` = '$staff_id';";
+        $selectsql = "SELECT users.gender, users.user_name, users_profile.user_profile, users_profile.bio 
+        FROM users 
+        LEFT JOIN users_profile ON users.staff_id = users_profile.author_id 
+        WHERE users.staff_id = '$staff_id';";
+
+        // print_r($selectsql);
         $queryimage = database_connection()->query($selectsql);
 
         if ($queryimage) {
             $row = mysqli_fetch_assoc($queryimage);
-
             if ($row) {
-                // Proceed with handling the data (for example, setting the profile image)
-                $profile = isset($row['gender']) && $row['gender'] == 'male' ? "defaultmale.png" : "defaultfemale.png";
+                // Proceed with handling the data 
+                $profile = !empty($row['user_profile']) ? $row['user_profile'] :
+                    (isset($row['gender']) && $row['gender'] == 'male' ? "defaultmale.png" : "defaultfemale.png");
             } else {
-                $profile = "default.png"; // If no user is found
+                $profile = "defaultmale.png"; // If no user is found
             }
         } else {
             echo "SQL Error: " . database_connection()->error; // For debugging query errors
-            $profile = "default.png"; // If query fails
+            $profile = "defaultmale.png"; // If query fails
         }
     } else {
         $profile = "defaultfemale.png"; // If no user is logged in
     }
+
+    // $staff_id = $_SESSION['author_id'];
+    // if (isset($staff_id)) {
+    //     $selsectbio = "SELECT `bio` FROM `user_profile` WHERE `staff_id` = '$author_id';";
+    //     $selsectbio = database_connection()->query($selsectbio);
+
+    //     if (isset($selsectbio)) {
+    //         $bio = mysqli_fetch_assoc($selsectbio);
+    //     }
+    // }
 }
 
 ?>
@@ -129,7 +144,7 @@ if (isset($_SESSION['staff_id'])) {
                     </h3>
 
                     <p class="text-white">
-                        <?php echo isset($row['bio']) ? $row['bio'] : 'No bio available.'; ?>
+                        <?php echo isset($row['bio']) ? $row['bio'] : 'Unknown bio'; ?>
                     </p>
                     <!-- <button class="btn btn-primary">Edit Profile</button> -->
                 </div>
