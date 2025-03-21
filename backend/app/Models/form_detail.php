@@ -7,9 +7,16 @@ require_once('./Userdetail.php');
         <div class="col-4">
             <div class="form-container">
                 <form class="form" method="post">
+                    <?php
+                    if (isset($message) == "success") {
+                        echo '<div class="alert alert-success" >Product is completed!!</div>';
+                    } else if (isset($message) == "fail") {
+                        echo '<div class="alert alert-danger" >Product is not completed!!!</div>';
+                    }
+                    ?>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required="" placeholder="Please input product name">
+                        <label for="name">Title</label>
+                        <input type="text" id="name" name="title" required="" placeholder="Please input product title">
                     </div>
                     <div class="form-group">
                         <label for="Regular_price">Regular_price</label>
@@ -18,13 +25,13 @@ require_once('./Userdetail.php');
                     </div>
                     <div class="mb-3">
                         <label for="size">Size</label>
-                        <select class="form-select form-select-sm">
+                        <select class="form-select form-select-sm" name="size">
                             <option selected>Pleace select your size</option>
-                            <option value="1">XS</option>
-                            <option value="2">S</option>
-                            <option value="3">M</option>
-                            <option value="4">L</option>
-                            <option value="5">XL</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
                         </select>
                     </div>
                     <div class="mb-3">

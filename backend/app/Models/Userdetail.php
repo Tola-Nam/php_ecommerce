@@ -31,8 +31,9 @@ if (isset($_SESSION['staff_id'])) {
         $selectsql = "SELECT users.gender, users.user_name, users_profile.user_profile, users_profile.bio 
         FROM users 
         LEFT JOIN users_profile ON users.staff_id = users_profile.author_id 
-        WHERE users.staff_id = '$staff_id';";
-
+        WHERE users.staff_id = '$staff_id'  
+        ORDER BY users_profile.upload_profile_at DESC 
+        LIMIT 1;";
         // print_r($selectsql);
         $queryimage = database_connection()->query($selectsql);
 
@@ -52,16 +53,6 @@ if (isset($_SESSION['staff_id'])) {
     } else {
         $profile = "defaultfemale.png"; // If no user is logged in
     }
-
-    // $staff_id = $_SESSION['author_id'];
-    // if (isset($staff_id)) {
-    //     $selsectbio = "SELECT `bio` FROM `user_profile` WHERE `staff_id` = '$author_id';";
-    //     $selsectbio = database_connection()->query($selsectbio);
-
-    //     if (isset($selsectbio)) {
-    //         $bio = mysqli_fetch_assoc($selsectbio);
-    //     }
-    // }
 }
 
 ?>
@@ -144,7 +135,7 @@ if (isset($_SESSION['staff_id'])) {
                     </h3>
 
                     <p class="text-white">
-                        <?php echo isset($row['bio']) ? $row['bio'] : 'Unknown bio'; ?>
+                        <?php echo isset($row['bio']) ? $row['bio'] : ''; ?>
                     </p>
                     <!-- <button class="btn btn-primary">Edit Profile</button> -->
                 </div>
