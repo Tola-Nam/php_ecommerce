@@ -1,6 +1,4 @@
 <?php
-
-use LDAP\Result;
 // coonnection database file
 include '../../routes/database-conncetion.php';
 // function for register account
@@ -43,38 +41,6 @@ function registerUser()
         }
     }
 }
-// function for add product 
-function addproduct()
-{
-    global $database_connection;
-
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        // print_r($_POST);
-        $authior_id = $_SESSION['staff_id'];
-        $title = $_POST['title'];
-        $regular_price = $_POST['regular_price'];
-        $size = $_POST['size'];
-        $color = $_POST['color'];
-        $product_detail = $_POST['product_detail'];
-
-        // echo $title . $regular_price . $size . $color . $product_detail;
-        if (empty($title) || empty($regular_price) || empty($size) || empty($color) || empty($product_detail)) {
-            header("Location: dashboardpage.php");
-        } else {
-            $InsertQuery = "INSERT INTO `products` (`title`,`regular_price`,`size`,`color`,`product_detail`,`author_id`)
-                         VALUES('$title','$regular_price','$size','$color','$product_detail','$authior_id');";
-            // echo $InsertQuery;
-            try {
-                $result = database_connection()->query($InsertQuery);
-                $message = "success";
-            } catch (mysqli_sql_exception $e) {
-                $message = "fail";
-            }
-        }
-    }
-}
-addproduct();
-
 // function for chance image to name image
 function fileuploader($sourcefile): string
 {
@@ -112,4 +78,51 @@ function formuploadprofile()
     }
 }
 formuploadprofile();
+// function get product detail
+
+function getproduct()
+{
+    global $database_connection;
+
+    if (isset($_SERVER['REQUEST_METHOD'])) {
+        $author_id = $_SESSION['staff_id'];
+        $selectQuery = "SELECT * FROM `products` WHERE `author_id` = '$author_id';";
+        $data = database_connection()->query($selectQuery);
+
+        if (isset($data)) {
+            // $result = mysqli_fetch_assoc($data);
+            // print_r($result);
+            while ($row = mysqli_fetch_assoc($data)) {
+                $code = $row['code'];
+                echo '
+                <tr>
+                    <td>' . $row['code'] . '</td>
+                    <td class=" truncate d-none d-lg-table-cell">' . $row['title'] . '</td>
+                    <td><span class="bg-success d-block text-white rounded-1 me-4 p-1 d-flex justify-content-center ">' . $row['regular_price'] . '$</span></td>
+                    <td class="d-none d-md-table-cell">' . $row['size'] . '</td>
+                    <td class="d-none d-md-table-cell">' . $row['color'] . '</td>
+                    <td class="d-none d-lg-table-cell truncate">' . $row['product_detail'] . '.</td>
+                    <td class="d-none d-lg-table-cell truncate">' . $row['created_at'] . '</td>
+                    <td class="d-none d-xl-table-cell">' . $row['author_id'] . '</td>
+                    <td class="d-none d-xl-table-cell">
+                    <span class="d-block bg-danger rounded-1 p-1 text-white me-3">
+                        <i class="bi bi-eye me-2"></i>' . $row['viewers'] . '
+                    </span></td>
+                    <td class="d-none d-xl-table-cell"> 
+                        <img class=" w-50 h-50"" src="../Asset/image/' . $row['Thumbnail'] . '" alt="Thumbnail"> 
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="updateproduct.php?code=' . $code . '" class="btn btn-primary btn-sm">Update</a>
+                            <button class="btn btn-danger btn-sm" >Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                ';
+            }
+        }
+    }
+}
+
+
 ?>

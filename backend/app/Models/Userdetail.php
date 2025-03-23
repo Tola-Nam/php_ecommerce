@@ -154,7 +154,7 @@ if (isset($_SESSION['staff_id'])) {
                 <li class="list-group-item bg-dark text-white fs-5"><a class="text-white text-decoration-none"
                         href="form_detail.php"><i class="bi bi-ui-checks-grid me-2"></i>Form</a></li>
                 <li class="list-group-item bg-dark text-white fs-5"><a class="text-white text-decoration-none"
-                        href="report.php"><i class="bi bi-card-checklist me-2"></i>report</a></li>
+                        href="updateproduct.php"><i class="bi bi-pencil-square me-2"></i>Update</a></li>
                 <li class="list-group-item bg-dark text-white fs-5"> <a type="submit"
                         class="text-danger text-decoration-none" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"><i class="bi bi-box-arrow-left me-2"></i>
@@ -180,7 +180,7 @@ if (isset($_SESSION['staff_id'])) {
                             </div>
                         </nav>
                     </div>
-                    <div class="col-1 d-flex algin-middle">
+                    <div class="col-1 d-flex algin-middle p-1">
                         <div class="icons">
                             <!-- Dark Mode Toggle Button -->
                             <button class="btn btn-success btn-dark-mode me-1" type="button" onclick="toggleDarkMode()">
@@ -188,7 +188,7 @@ if (isset($_SESSION['staff_id'])) {
                             </button>
                         </div>
                         <div class="icons">
-                            <button class="btn btn-primary" role="button"><i class="bi bi-bell me-1"></i></button>
+                            <button class="btn btn-primary" role="button"><i class="bi bi-bell me-0"></i></button>
                         </div>
                     </div>
 

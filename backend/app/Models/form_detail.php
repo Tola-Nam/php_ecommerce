@@ -1,12 +1,13 @@
 <?php
 require_once('./Userdetail.php');
+require_once('../Controllers/functionuploadimage.php');
 ?>
 
-<div class="container">
+<div class="container shadow">
     <div class="row">
         <div class="col-4">
             <div class="form-container">
-                <form class="form" method="post">
+                <form class="form" method="post" enctype="multipart/form-data">
                     <?php
                     if (isset($message) == "success") {
                         echo '<div class="alert alert-success" >Product is completed!!</div>';
@@ -21,6 +22,11 @@ require_once('./Userdetail.php');
                     <div class="form-group">
                         <label for="Regular_price">Regular_price</label>
                         <input type="text" id="regular_price" name="regular_price" required=""
+                            placeholder="Please input your regular_price">
+                    </div>
+                    <div class="form-group">
+                        <label for="Regular_price">Regular_price</label>
+                        <input type="file" id="Thumbnail" name="Thumbnail" required=""
                             placeholder="Please input your regular_price">
                     </div>
                     <div class="mb-3">
