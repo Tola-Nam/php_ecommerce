@@ -75,9 +75,7 @@ if (isset($_SESSION['staff_id'])) {
     <!-- @link icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- @link jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- @link sweet alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- @link css -->
@@ -144,6 +142,9 @@ if (isset($_SESSION['staff_id'])) {
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-dark text-white fs-5"><a class="text-white text-decoration-none"
                         href="dashboardpage.php"><i class="bi bi-grid-fill me-2"></i>Dashboard</a>
+                </li>
+                <li style="list-style-type:none;"><a class=" d-none text-white text-decoration-none"
+                        href="deletedProduct.php"><i class="bi bi-grid-fill me-2"></i>deleted</a>
                 </li>
                 <li class="list-group-item bg-dark text-white fs-5"><a class="text-white text-decoration-none"
                         href="product.php"><i class="bi bi-unity me-2"></i>Products</a></li>

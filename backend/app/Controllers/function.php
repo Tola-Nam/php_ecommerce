@@ -114,7 +114,7 @@ function getproduct()
                     <td>
                         <div class="d-flex gap-2">
                             <a href="updateproduct.php?code=' . $code . '" class="btn btn-primary btn-sm">Update</a>
-                            <button class="btn btn-danger btn-sm" >Delete</button>
+                            <button type="button" class="btn btn-danger btn-sm btn-deleted" data-bs-toggle="modal" data-bs-target="#newModal" data-code="' . $code . '">Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -123,6 +123,7 @@ function getproduct()
         }
     }
 }
-
-
+function countViewer(){
+    
+}
 ?>

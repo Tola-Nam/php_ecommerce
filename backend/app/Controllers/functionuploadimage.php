@@ -13,6 +13,7 @@ function addproduct()
         $size = $_POST['size'];
         $color = $_POST['color'];
         $product_detail = $_POST['product_detail'];
+        $category = $_POST['category'];
         $sourcefile = $_FILES['Thumbnail'];
         $filename = imageuploader($sourcefile);
 
@@ -20,8 +21,8 @@ function addproduct()
         if (empty($title) || empty($regular_price) || empty($size) || empty($color) || empty($product_detail)) {
             header("Location: dashboardpage.php");
         } else {
-            $InsertQuery = "INSERT INTO `products` (`title`,`regular_price`,`size`,`color`,`product_detail`,`author_id`,`Thumbnail`)
-                         VALUES('$title','$regular_price','$size','$color','$product_detail','$authior_id','$filename');";
+            $InsertQuery = "INSERT INTO `products` (`title`,`regular_price`,`size`,`color`,`product_detail`,`author_id`,`Thumbnail`,`category`)
+                         VALUES('$title','$regular_price','$size','$color','$product_detail','$authior_id','$filename','$category');";
             // echo $InsertQuery;
             try {
                 $result = database_connection()->query($InsertQuery);

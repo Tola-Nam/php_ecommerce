@@ -52,6 +52,15 @@ require_once('../Controllers/functionuploadimage.php');
                         </select>
                     </div>
                     <div class="mb-3">
+                        <select class="form-select form-select-sm" name="category" id="gategory">
+                            <option selected>Please select your category</option>
+                            <option value="newcategory">NewProduct</option>
+                            <option value="promotionproduct">PromotionProduct</option>
+                            <option value="discountProduct">DiscountProduct</option>
+                            <option value="PopularProduct">PopularProduct</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="product_detail">Product_detail</label>
                         <textarea class="form-control" rows="6" name="product_detail" id="product_area"
                             placeholder="Enter your product detail"></textarea>
