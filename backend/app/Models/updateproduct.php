@@ -31,7 +31,7 @@ if (isset($_GET['code'])) {
     }
 }
 ?>
-<div class="container shadow bg-white">
+<div class="container shadow bg-white d-flex">
     <div class="col-4">
         <div class="form-container">
             <form class="form" method="post" enctype="multipart/form-data">
@@ -102,4 +102,20 @@ if (isset($_GET['code'])) {
         </div>
         </form>
     </div>
+    <!-- update slider -->
+    <!-- <div class="col-4 mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-container">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="form-group mb-3">
+                            <label for="slider" class="form-label">Update Slider</label>
+                            <input type="file" class="form-control" name="slider" id="slider" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>

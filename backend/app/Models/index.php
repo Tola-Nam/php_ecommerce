@@ -119,7 +119,7 @@ registerUser();
                         <div class="mt-3">
                             <div class="input-group d-flex flex-column align-items-start">
                                 <div class="form-check mb-2">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">
                                         I agree to all statements in <a href="#" class="text-primary">Terms of
                                             Service</a>

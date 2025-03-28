@@ -34,4 +34,22 @@ function addproduct()
     }
 }
 addproduct();
+
+// function insertSlider()
+// {
+//     if ($_SERVER['REQUEST_METHOD'] == "POST") {
+//         $sourcefile = $_FILES['image_slider'];
+//         $filename = imageuploader($sourcefile);
+//         $author_id = $_SESSION['staff_id'];
+
+//         $insertQuery = "INSERT INTO `slider`(`image_slider`,`author_id`,upload_at`)
+//                        VALUES('$filename','$author_id')";
+
+//         $result = database_connection()->query($insertQuery);
+
+//         print_r($result);
+//     }
+// }
+
+// insertSlider();
 ?>

@@ -73,6 +73,21 @@ require_once('../Controllers/functionuploadimage.php');
             </div>
             </form>
         </div>
+        <!-- <div class="col-4">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-container">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <div class="form-group mb-3">
+                                <label for="slider" class="form-label">Upload Slider</label>
+                                <input type="file" class="form-control" name="image_slider" id="slider" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </div>
 </body>

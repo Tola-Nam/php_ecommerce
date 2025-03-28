@@ -52,9 +52,9 @@
                 <div class="text-title">
                     <span>Social</span>
                     <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
+                        <li><a href="https://web.facebook.com/tola.kpt.142">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/namtola4444gmail.com7/">instagram</a></li>
+                        <li><a href="https://www.tiktok.com/@nam_tola">Tik Tok</a></li>
                     </ul>
                 </div>
             </div>
@@ -70,7 +70,6 @@
                 </div>
             </div>
         </div>
-        <hr class="text-white">
         <div class="row">
             <!-- Map Section -->
             <div class="col-12 col-md-8 mt-2">
@@ -86,12 +85,19 @@
             <div
                 class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center mt-2 mt-md-0">
                 <div class="icons">
-                    <button class="btn btn-success me-2 mb-2"><i class="bi bi-twitter"></i></button>
-                    <button class="btn btn-success me-2 mb-2"><i class="bi bi-linkedin"></i></button>
-                    <button class="btn btn-success me-2 mb-2"><i class="bi bi-facebook"></i></button>
-                    <button class="btn btn-success me-2 mb-2"><i class="bi bi-github"></i></button>
-                    <button class="btn btn-success me-2 mb-2"><i class="bi bi-instagram"></i></button>
-                    <button class="btn btn-success mb-2"><i class="bi bi-telegram"></i></button>
+                    <form action="" method="post">
+                        <button type="submit" name="btn_twitter" class="btn btn-success me-2 mb-2"><i
+                                class="bi bi-twitter"></i></button>
+                        <button name="btn_linkedin" class="btn btn-success me-2 mb-2"><i
+                                class="bi bi-linkedin"></i></button>
+                        <button name="btn_facebook" class="btn btn-success me-2 mb-2"><i
+                                class="bi bi-facebook"></i></button>
+                        <button type="submit" name="btn_messagenger" class="btn btn-success me-2 mb-2"><i
+                                class="bi bi-messenger"></i></button>
+                        <button name="btn_instagram" class="btn btn-success me-2 mb-2"><i
+                                class="bi bi-instagram"></i></button>
+                        <button name="btn_telegram" class="btn btn-success mb-2"><i class="bi bi-telegram"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
